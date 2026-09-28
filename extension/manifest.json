@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "QQ群相册打卡统计（本地）",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "description": "从已登录的QQ群相册读取相册名和上传日期，在本机生成历史及周打卡表。",
   "permissions": ["storage", "tabs", "downloads"],
   "host_permissions": ["https://h5.qzone.qq.com/*"],

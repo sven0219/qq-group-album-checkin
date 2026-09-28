@@ -19,6 +19,28 @@ function environment() {
   return {run:script=>vm.runInContext(script,context),rpc:message=>new Promise(resolve=>handler(message,{},resolve)),events,get operation(){return operation;}};
 }
 const config={term:'演示学期',className:'演示班',groupId:'123456789',semesterStartDate:'2026-09-01',roster:[{studentNo:1,name:'示例小朋友甲',albumName:'示例小朋友甲'}]};
+test('branding is file-configured, renders text safely, and hides empty author',async()=>{
+  const elements={appTitle:{},appAuthor:{}};
+  const titles=[];
+  const document={getElementById:id=>elements[id]};
+  const context=vm.createContext({document,chrome:{action:{setTitle:async value=>titles.push(value.title)}}});
+  const source=await fs.readFile(new URL('../extension/branding.js',import.meta.url),'utf8');
+  vm.runInContext(source,context);
+  assert.equal(elements.appTitle.textContent,'QQ群相册阅读打卡导出工具');
+  assert.equal(elements.appAuthor.hidden,true);
+  vm.runInContext('applyBranding({title:"演示幼儿园工具",author:"演示作者"})',context);
+  assert.equal(document.title,'演示幼儿园工具');
+  assert.equal(titles.at(-1),'演示幼儿园工具');
+  assert.equal(elements.appAuthor.textContent,'作者：演示作者');
+  assert.equal(elements.appAuthor.hidden,false);
+  vm.runInContext('applyBranding({title:" ",author:"<script>示例</script>"})',context);
+  assert.equal(elements.appTitle.textContent,'QQ群相册阅读打卡导出工具');
+  assert.equal(elements.appAuthor.textContent,'作者：<script>示例</script>');
+  assert.equal(elements.appAuthor.innerHTML,undefined);
+  const html=await fs.readFile(new URL('../extension/popup.html',import.meta.url),'utf8');
+  assert.ok(html.includes('<script src="branding.js"></script>'));
+  assert.ok(!/<(?:input|textarea)\b[^>]*id="(?:appTitle|appAuthor)"/.test(html));
+});
 test('shared defaults contain no group or roster',async()=>{
   const e=environment(),reply=await e.rpc({type:'GET_STATE'});
   assert.equal(reply.data.groupId,'');assert.equal(reply.data.roster.length,0);assert.equal(reply.data.semesterStartDate,'');

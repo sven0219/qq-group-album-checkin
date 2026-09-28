@@ -4,7 +4,7 @@
 
 例如，一个班有几十位小朋友，每人一个相册。家长每天上传阅读照片或视频，统计人不必逐个打开相册、抄日期、计算天数：配置一次名单，以后选择日期、点击导出即可。
 
-**当前版本：2.1.1。分享版不内置真实群号或儿童名单，首次使用需要自行配置。** 这是非官方工具，不是腾讯提供或维护的产品，依赖 QQ 群相册网页的内部模块，QQ 改版后可能需要更新。
+**当前版本：2.1.2。分享版不内置真实群号或儿童名单，首次使用需要自行配置。** 这是非官方工具，不是腾讯提供或维护的产品，依赖 QQ 群相册网页的内部模块，QQ 改版后可能需要更新。
 
 ## 1. 插件能做什么
 
@@ -94,7 +94,7 @@
 
 建议使用支持 Manifest V3 的当前 Chrome 版本。本扩展尚未发布到 Chrome 网上应用店，需要加载已解压扩展。
 
-1. 打开 [Releases 下载页](https://github.com/sven0219/qq-group-album-checkin/releases/latest)，在 **Assets** 中下载 `qq-group-album-checkin-v2.1.1.zip` 并解压。也可以在本仓库点击 **Code → Download ZIP** 下载源码。
+1. 打开 [Releases 下载页](https://github.com/sven0219/qq-group-album-checkin/releases/latest)，在 **Assets** 中下载 `qq-group-album-checkin-v2.1.2.zip` 并解压。也可以在本仓库点击 **Code → Download ZIP** 下载源码。
 2. 在 Chrome 地址栏输入 `chrome://extensions/`。
 3. 打开右上角“开发者模式”。
 4. 点击“加载已解压的扩展程序”。
@@ -244,11 +244,31 @@
 
 按“孩子 + 上传日期”汇总，`媒体数量`表示当日读取到的去重媒体数量，打卡天数仍只增加 1。
 
-## 11. 源码与测试
+## 11. 自定义工具标题和作者（仅配置文件）
+
+标题和作者不在插件页面提供输入框，也不写入“保存设置”的班级配置。修改安装目录内的 `extension/branding.js` 中两个字段即可：
+
+```js
+const branding = Object.freeze({
+  title: "你的幼儿园阅读打卡导出工具",
+  author: "某班家长制作"
+});
+```
+
+- `title`：面板大标题、页面标题和打开面板后的工具栏悬停提示；空白时使用通用默认标题。
+- `author`：页脚显示为“作者：某班家长制作”。留空 `""` 则隐藏页脚。
+- 保存文件后，在 `chrome://extensions/` 点击插件“重新加载”，再打开面板。
+- Chrome 扩展管理页面的插件名称由 `extension/manifest.json` 的 `name` 静态决定；如也需修改该处名称，另行编辑 `name`。首次打开面板前的悬停提示由 `action.default_title` 决定。
+- 这些文字只改变工具界面，不改变 Excel 的学期、班级标题或文件名。分享定制安装包前请核对署名；更新时请备份 `branding.js`，避免自定义内容被覆盖。
+
+开源默认使用通用标题且不预置个人作者，仍不包含任何真实儿童名单或群号。
+
+## 12. 源码与测试
 
 ```text
 extension/
   manifest.json       Chrome Manifest V3 配置
+  branding.js         标题和作者文件配置（无页面配置入口）
   popup.html/css/js   配置、日历、状态与导出界面
   background.js      任务、导航、统计和下载
   content.js         隔离环境读取桥接

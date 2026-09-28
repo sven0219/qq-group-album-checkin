@@ -1,7 +1,7 @@
 <!doctype html>
-<html lang="zh-CN"><head><meta charset="utf-8"><link rel="stylesheet" href="popup.css"></head>
+<html lang="zh-CN"><head><meta charset="utf-8"><title>QQ群相册阅读打卡导出工具</title><link rel="stylesheet" href="popup.css"></head>
 <body>
-  <header><div class="eyebrow">READING CHECK-IN <span>v2.1.1</span></div><h1>阅读打卡周报</h1><p>自动读取群相册，一键生成每周记录</p></header>
+  <header><div class="eyebrow">READING CHECK-IN <span>v2.1.2</span></div><h1 id="appTitle">QQ群相册阅读打卡导出工具</h1><p>自动读取群相册，一键生成每周记录</p></header>
   <main>
     <section id="statusBox" class="status-box" data-state="idle" role="status" aria-live="polite"><div id="status">正在载入…</div><progress id="progress" hidden max="25" value="0"></progress><div id="emptyNotice" class="hint" hidden></div></section>
     <section class="card settings"><div class="section-title"><h2>班级设置</h2><span id="rosterCount" class="badge">— 位孩子</span></div>
@@ -19,5 +19,6 @@
       <p class="hint">按周一至周日导出完整周。每周一个 Sheet，附历史明细与统计说明。</p>
     </section>
     <p class="privacy">导出前自动刷新、扫描。只读取相册名与上传时间，不下载儿童照片或视频。跳转或关闭面板后任务仍会继续，可重新打开查看进度。</p>
-  </main><script src="popup.js"></script>
+    <footer id="appAuthor" class="author" hidden></footer>
+  </main><script src="branding.js"></script><script src="popup.js"></script>
 </body></html>
