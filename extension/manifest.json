@@ -1,0 +1,20 @@
+{
+  "manifest_version": 3,
+  "name": "QQ群相册打卡统计（本地）",
+  "version": "2.1.1",
+  "description": "从已登录的QQ群相册读取相册名和上传日期，在本机生成历史及周打卡表。",
+  "permissions": ["storage", "tabs", "downloads"],
+  "host_permissions": ["https://h5.qzone.qq.com/*"],
+  "action": { "default_title": "QQ群相册打卡统计", "default_popup": "popup.html" },
+  "background": { "service_worker": "background.js", "type": "module" },
+  "content_scripts": [{
+    "matches": ["https://h5.qzone.qq.com/groupphoto/*"],
+    "js": ["page-reader.js"],
+    "world": "MAIN",
+    "run_at": "document_idle"
+  }, {
+    "matches": ["https://h5.qzone.qq.com/groupphoto/*"],
+    "js": ["content.js"],
+    "run_at": "document_idle"
+  }]
+}

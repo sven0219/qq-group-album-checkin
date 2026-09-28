@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><link rel="stylesheet" href="popup.css"></head>
+<body>
+  <header><div class="eyebrow">READING CHECK-IN <span>v2.1.1</span></div><h1>阅读打卡周报</h1><p>自动读取群相册，一键生成每周记录</p></header>
+  <main>
+    <section id="statusBox" class="status-box" data-state="idle" role="status" aria-live="polite"><div id="status">正在载入…</div><progress id="progress" hidden max="25" value="0"></progress><div id="emptyNotice" class="hint" hidden></div></section>
+    <section class="card settings"><div class="section-title"><h2>班级设置</h2><span id="rosterCount" class="badge">— 位孩子</span></div>
+      <div class="setting-grid"><label>QQ群号<input id="groupId" inputmode="numeric" placeholder="请输入QQ群号"></label><label>班级（标题与文件名）<input id="className" placeholder="小三班"></label></div>
+      <label>学期名称<input id="term" placeholder="2026年-2027年第一学期"></label>
+      <label>学期开始日期（所在自然周为第 1 周）<input id="semesterStartDate" type="date"></label><p id="firstWeekHint" class="hint"></p>
+      <details><summary>编辑儿童名单 <span>学号 / 姓名 / 相册名</span></summary><textarea id="roster" aria-label="儿童名单" spellcheck="false" placeholder="1,示例小朋友甲,示例小朋友甲&#10;2,示例小朋友乙,示例小朋友乙"></textarea><p class="hint">每行一位，例如：1,示例小朋友甲,示例小朋友甲。相册名需与 QQ 一致。</p></details>
+      <button id="save" class="quiet">保存设置</button>
+    </section>
+    <section class="card"><div class="section-title"><h2>导出周报</h2><span class="badge">自动扫描</span></div>
+      <div class="export-block"><label>指定周中的任意一天<input id="weekStart" type="date"></label><p id="selectedHint" class="hint"></p><button id="exportSelected" class="primary">导出指定周</button></div>
+      <button id="exportPrevious" class="outline">导出上周</button>
+      <div class="divider"></div><div class="range-title">批量导出周范围</div><div class="range-fields"><label>开始日期<input id="rangeStartDate" type="date"></label><span>至</span><label>结束日期<input id="rangeEndDate" type="date"></label></div><p id="rangeHint" class="hint"></p>
+      <button id="exportRange" class="outline">导出所选日期所在的周范围</button>
+      <p class="hint">按周一至周日导出完整周。每周一个 Sheet，附历史明细与统计说明。</p>
+    </section>
+    <p class="privacy">导出前自动刷新、扫描。只读取相册名与上传时间，不下载儿童照片或视频。跳转或关闭面板后任务仍会继续，可重新打开查看进度。</p>
+  </main><script src="popup.js"></script>
+</body></html>

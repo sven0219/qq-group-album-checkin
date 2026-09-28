@@ -1,0 +1,14 @@
+.DS_Store
+node_modules/
+*.xlsx
+*.xls
+*.zip
+*.png
+*.jpg
+*.jpeg
+*.mp4
+*.log
+.env
+.env.*
+local-data/
+work/
