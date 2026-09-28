@@ -94,7 +94,7 @@
 
 建议使用支持 Manifest V3 的当前 Chrome 版本。本扩展尚未发布到 Chrome 网上应用店，需要加载已解压扩展。
 
-1. 在本仓库点击 **Code → Download ZIP**，下载并解压。
+1. 打开 [Releases 下载页](https://github.com/sven0219/qq-group-album-checkin/releases/latest)，在 **Assets** 中下载 `qq-group-album-checkin-v2.1.1.zip` 并解压。也可以在本仓库点击 **Code → Download ZIP** 下载源码。
 2. 在 Chrome 地址栏输入 `chrome://extensions/`。
 3. 打开右上角“开发者模式”。
 4. 点击“加载已解压的扩展程序”。
